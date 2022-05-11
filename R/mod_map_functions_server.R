@@ -33,10 +33,10 @@ map_server_get_region_values <- function(table_name,
   else
     label <- "subjects"
   hover_template <- stringr::str_flatten(c(
-    "{region}",                     # Mercer County
-    "{absolute_count} {label}",     # 23 incidents
-    "{relative}% of all {label}",   # 4.53% of all incidents
-    "{percapita} per 100K pop"),    # 0.324 per 100K pop
+    "{region}",                       # Mercer County
+    "{absolute_count} {label}",       # 23 incidents
+    "{relative}% of all {label}",     # 4.53% of all incidents
+    "{percapita} per 100K pop/year"), # 0.324 per 100K pop/year
     collapse="\n"
   )
   hover_template_zero_denom <- stringr::str_flatten(c(
@@ -50,7 +50,9 @@ map_server_get_region_values <- function(table_name,
     dplyr::mutate(
       relative = signif(100 * absolute_count / region_count, digits = 3)) %>%
     dplyr::mutate(
-      percapita = signif(100000 * absolute_count / population, digits = 3)) %>%
+      percapita = signif(
+        100000 * absolute_count / population / data_range_in_years,
+        digits = 3)) %>%
     dplyr::mutate(
       absolute_count = dplyr::if_else(region_count == 0, NA_integer_, absolute_count)) %>%
     dplyr::mutate(

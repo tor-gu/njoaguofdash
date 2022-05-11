@@ -53,8 +53,8 @@ test_that("map_server_get_region_values works", {
                                          unfiltered_summary)
   expected <- tibble::tribble(
     ~region, ~absolute_count, ~population, ~region_count, ~relative, ~percapita, ~hover_text,
-    "A",     1,               10,          1,             100,       10000,      "A\n1 incidents\n100% of all incidents\n10000 per 100K pop",
-    "B",     0,               15,          3,               0,           0,      "B\n0 incidents\n0% of all incidents\n0 per 100K pop",
+    "A",     1,               10,          1,             100,        6640,      "A\n1 incidents\n100% of all incidents\n6640 per 100K pop/year",
+    "B",     0,               15,          3,               0,           0,      "B\n0 incidents\n0% of all incidents\n0 per 100K pop/year",
     "C",     NA,              15,          0,              NA,          NA,      "C\nNo data",
   )
   expect_equal(actual, expected)
