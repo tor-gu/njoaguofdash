@@ -34,6 +34,8 @@ njoaguofdashApp <- function() {
   }
 
   server <- function(input, output, session) {
+    shinyhelper::observe_helpers(help_dir = "helpfiles")
+
     current_filter <- filterServer("filter")
     clicked_region <- mapServer("map", current_filter)
     tableServer("table", current_filter, clicked_region)

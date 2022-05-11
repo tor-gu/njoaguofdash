@@ -6,11 +6,20 @@ filterUI <- function(id) {
                 selected="state", inline=TRUE),
     selectInput(ns("county"), "County", counties),
     radioButtons(ns("table"), "Incidents or Subjects",
-                c("Incidents"="incident","Subjects"="subject")),
+                c("Incidents"="incident","Subjects"="subject")) %>%
+      shinyhelper::helper(type="inline",
+                          title="Incidents or Subjects",
+                          content=filter_ui_table_help()),
     selectInput(ns("incident_filter"), "Filter",
-                choices=filter_ui_make_filter_choice_list("incident")),
+                choices = filter_ui_make_filter_choice_list("incident")) %>%
+      shinyhelper::helper(type = "inline",
+                          title = "Filter",
+                          content = filter_ui_filter_help()),
     selectInput(ns("subject_filter"), "Filter",
-                choices=filter_ui_make_filter_choice_list("subject")),
+                choices = filter_ui_make_filter_choice_list("subject")) %>%
+      shinyhelper::helper(type = "inline",
+                          title = "Filter",
+                          content = filter_ui_filter_help()),
     selectInput(ns("filter_value"), "Filter Value",
                 choices=list("all"), selected="all"),
   )
@@ -81,7 +90,7 @@ filterServer <- function(id) {
                                        filter_name(), input$filter_value)
     })
 
-    # This is the return value -- a filtered table TODO better comment
+    # This is the module return value -- list of reactives.
     list(
       table_name = reactive(input$table),
       filter_name = filter_name,

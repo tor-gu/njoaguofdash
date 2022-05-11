@@ -30,3 +30,21 @@ filter_ui_make_filter_choice_list <- function(table_name) {
   names(choices) <- c(all, "Single Valued", "Multi Valued")
   choices
 }
+
+filter_ui_filter_help <- function() {
+  "<ul>
+    <li>
+      <em>Single value</em> fields have only one value per incident or
+      subject -- for example, each subject has a single age.</li>
+    <li>
+      <em>Multi-value</em> fields may have multiple values per incident or
+      subject -- for example, an officer may sustain multiple injuries in a
+      single incident.
+    </li>
+  </ul>"
+}
+
+filter_ui_table_help <- function() {
+  "<em>Incidents</em> are use of force reports filed by law enforcement
+  officers. Incidents may involve multiple <em>subjects</em>."
+}

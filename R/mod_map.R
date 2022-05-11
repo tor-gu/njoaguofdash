@@ -9,9 +9,12 @@ mapInputUI <- function(id) {
   tagList(
     radioButtons(ns("scale"), "Scale",
                  choices=c("Absolute"="absolute",
-                           "Relative"="relative",
-                           "Per Capita"="percapita"),
-                 selected="percapita", inline=FALSE)
+                           "Per Capita"="percapita",
+                           "Relative"="relative"),
+                 selected="absolute", inline=FALSE) %>%
+      shinyhelper::helper(type = "inline",
+                          title = "Scale",
+                          content = map_ui_scale_help())
   )
 }
 
