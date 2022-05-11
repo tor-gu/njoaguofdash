@@ -1,0 +1,35 @@
+Package: njoaguofdash
+Type: Package
+Title: NJ OAG Use of Force data dashboard
+Version: 0.1.0
+Authors@R: 
+    person("Tor", "Gunston", , "tor.gunston@protonmail.com", role = c("aut", "cre"))
+Description: A dashboard application illustrating the njoaguof data package, 
+  which is is a repackaging of the NJ OAG Use of Force dataset.
+License: CC0
+URL: https://github.com/tor-gu/njoaguofdash
+BugReports: https://github.com/tor-gu/njoaguofdash/issues
+Encoding: UTF-8
+LazyData: true
+LazyDataCompression: gzip
+Imports: 
+    dplyr,
+    DT,
+    glue,
+    magrittr,
+    njoaguof,
+    plotly,
+    rlang,
+    rmarkdown,
+    shiny,
+    shinyjs,
+    stringr,
+    tidyr,
+    tigris,
+    torgutil
+RoxygenNote: 7.1.2
+Depends: 
+    R (>= 2.10)
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
