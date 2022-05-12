@@ -102,10 +102,19 @@ map_server_get_caption_text <- function(filter_name,
   }
 }
 
+map_server_hide_colorbar_maybe <- function(p, condition) {
+  # this is for use in the pipe in the next function --
+  # we want to remove the color bar conditionally
+  if (condition)
+    p %>% plotly::hide_colorbar()
+  else
+    p
+}
+
 map_server_make_plot <- function(map_with_values, value_column, title_text,
                                  caption_text) {
   if (value_column == "absolute_count") {
-      plot <- map_with_values %>%
+    plot <- map_with_values %>%
       plotly::plot_ly(
         type = "scatter",
         mode = "lines",
@@ -118,6 +127,7 @@ map_server_make_plot <- function(map_with_values, value_column, title_text,
         key =  ~ NAMELSAD,
         showlegend = FALSE
       )
+    val_range <- range(map_with_values$absolute_count, na.rm=TRUE)
   } else if ( value_column == "relative") {
     plot <- map_with_values %>%
       plotly::plot_ly(
@@ -132,6 +142,7 @@ map_server_make_plot <- function(map_with_values, value_column, title_text,
         key =  ~ NAMELSAD,
         showlegend = FALSE
       )
+    val_range <- range(map_with_values$relative, na.rm=TRUE)
   } else if (value_column == "percapita") {
     plot <- map_with_values %>%
       plotly::plot_ly(
@@ -146,7 +157,11 @@ map_server_make_plot <- function(map_with_values, value_column, title_text,
         key =  ~ NAMELSAD,
         showlegend = FALSE
       )
+    val_range <- range(map_with_values$percapita, na.rm=TRUE)
   } else { return (NULL) }
+
+  # Don't have color bars with negative values
+  zero_range <- val_range[[1]] == val_range[[2]]
 
   plot %>%
     plotly::config(displayModeBar = FALSE) %>%
@@ -155,6 +170,7 @@ map_server_make_plot <- function(map_with_values, value_column, title_text,
                                 title = caption_text),
                    yaxis = list(fixedrange = TRUE)) %>%
     plotly::colorbar(title = "") %>%
+    map_server_hide_colorbar_maybe(zero_range) %>%
     plotly::event_register("plotly_click")
 }
 
