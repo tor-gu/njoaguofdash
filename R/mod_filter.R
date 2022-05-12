@@ -71,6 +71,9 @@ filterServer <- function(id) {
       else input$subject_filter
     })
 
+    filter_display_name <- reactive({
+      filter_server_get_filter_display_name(input$table, filter_name())
+    })
 
     tables <- reactive({
       filter_server_get_tables(input$table, input$geography, input$county)
@@ -94,6 +97,7 @@ filterServer <- function(id) {
     list(
       table_name = reactive(input$table),
       filter_name = filter_name,
+      filter_display_name = filter_display_name,
       filter_value = reactive(input$filter_value),
       geography = reactive(input$geography),
       county = reactive(input$county),

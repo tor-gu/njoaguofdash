@@ -136,3 +136,9 @@ test_that("filter_server_get_filtered_table on subjects", {
     pull(type) %>% as.character() %>% unique()
   expect_equal(actual, "Person")
 })
+
+test_that("filter_server_get_filter_display_name basic test", {
+  actual <- filter_server_get_filter_display_name("subject", "race")
+  expected <- "Subject Race"
+  expect_equal(actual, expected)
+})

@@ -69,6 +69,7 @@ mapServer <- function(id, filter_result) {
 
     caption_text <- reactive({
       map_server_get_caption_text(filter_result$filter_name(),
+                                  filter_result$filter_display_name(),
                                   filter_result$filter_value())
     })
 

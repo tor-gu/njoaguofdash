@@ -48,3 +48,16 @@ test_that("table_server_get_header_text works", {
   expect_equal(table_server_get_header_text("incident", "Colt's Neck Township"),
                "Colt's Neck Township incidents")
 })
+
+test_that("map_server_get_caption_text handles basic test", {
+  actual <- map_server_get_caption_text("gender", "Officer Gender", "Male")
+  expected <- "Filtered by Officer Gender = Male"
+  expect_equal(actual, expected)
+})
+
+test_that("map_server_get_caption_text handles 'all'", {
+  actual <- map_server_get_caption_text("all", "All incidents", "all")
+  expected <- ""
+  expect_equal(actual, expected)
+
+})

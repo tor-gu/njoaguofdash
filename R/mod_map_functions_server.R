@@ -92,11 +92,13 @@ map_server_get_title_text <- function(geography, county, table_name, scale) {
   glue::glue(template)
 }
 
-map_server_get_caption_text <- function(filter_name, filter_value) {
+map_server_get_caption_text <- function(filter_name,
+                                        filter_display_name,
+                                        filter_value) {
   if (filter_name == "all") {
     ""
   } else {
-    glue::glue("Filtered by {filter_name} = {filter_value}")
+    glue::glue("Filtered by {filter_display_name} = {filter_value}")
   }
 }
 

@@ -66,3 +66,9 @@ filter_server_get_filtered_table <- function(table, table_name, filter_name,
     table
   }
 }
+
+filter_server_get_filter_display_name <- function(table_name, filter_name) {
+  this_filter <- filters %>%
+    dplyr::filter(table==table_name, filter==filter_name) %>%
+    dplyr::pull(display_name)
+}
