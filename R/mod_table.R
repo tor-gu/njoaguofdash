@@ -8,6 +8,7 @@ tableUI <- function(id) {
 
 tableServer <- function(id, filter_result, clicked_region) {
   moduleServer(id, function(input, output, session) {
+    # Hide everything when there is no region selected
     observe({
       shinyjs::toggleElement(
         "header",
@@ -21,6 +22,7 @@ tableServer <- function(id, filter_result, clicked_region) {
       )
     })
 
+    # Load the table of subject or incidents
     region_table <- reactive({
       table_server_get_region_table(
         filter_result$filtered_table(),
@@ -29,6 +31,7 @@ tableServer <- function(id, filter_result, clicked_region) {
       )
     })
 
+    # Wrap the table in a DT
     region_DT <- reactive({
       DT::datatable(
         region_table(),
@@ -38,10 +41,12 @@ tableServer <- function(id, filter_result, clicked_region) {
       )
     })
 
+    # Table header
     header_text <- reactive({
       table_server_get_header_text(filter_result$table_name(), clicked_region())
     })
 
+    # Render the outputs
     output$header <- renderText(header_text())
     output$table <- DT::renderDT(region_DT())
   })
