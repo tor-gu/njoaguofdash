@@ -25,7 +25,7 @@ mapServer <- function(id, filter_result) {
         session,
         "scale",
         choices = map_ui_make_scale_choice_list(filter_result$filter_name()),
-        selected = input$scale
+        selected = isolate(input$scale)
       )
     })
 
@@ -89,7 +89,7 @@ mapServer <- function(id, filter_result) {
 
     })
 
-    output$plot <- plotly::renderPlotly({
+    current_plot <- function() {
       if (input$scale == "absolute") {
         absolute_plot()
       } else if (input$scale == "relative") {
@@ -97,6 +97,10 @@ mapServer <- function(id, filter_result) {
       } else {
         percapita_plot()
       }
+    }
+
+    output$plot <- plotly::renderPlotly({
+      current_plot()
     })
 
 
