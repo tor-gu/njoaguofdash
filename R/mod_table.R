@@ -1,7 +1,7 @@
 tableUI <- function(id) {
   ns <- NS(id)
   tagList(
-    h3(textOutput(ns("header"))),
+    h4(textOutput(ns("header"))),
     DT::DTOutput(ns("table"))
   )
 }
