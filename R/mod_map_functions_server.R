@@ -61,7 +61,7 @@ map_server_get_region_values <- function(table_name,
       percapita = dplyr::if_else(region_count == 0, NA_real_, percapita)) %>%
     dplyr::mutate(hover_text =
                     dplyr::if_else(
-                      region_count == 0,
+                      is.na(region_count) | region_count == 0,
                       glue::glue(hover_template_zero_denom),
                       glue::glue(hover_template)
                     ))
@@ -166,9 +166,7 @@ map_server_make_plot <- function(map_with_values, value_column, title_text,
   plot %>%
     plotly::config(displayModeBar = FALSE) %>%
     plotly::layout(title = list(text = title_text),
-                   xaxis = list(fixedrange = TRUE,
-                                title = caption_text),
-                   yaxis = list(fixedrange = TRUE)) %>%
+                   xaxis = list(title = caption_text)) %>%
     plotly::colorbar(title = "") %>%
     map_server_hide_colorbar_maybe(zero_range) %>%
     plotly::event_register("plotly_click")

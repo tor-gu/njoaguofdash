@@ -1,9 +1,17 @@
 map_ui_make_scale_choice_list <- function(filter_name) {
+  # The relative scale is not available when there is no filter
   if (filter_name == "all") {
     c("Absolute"="absolute", "Per Capita"="percapita")
   } else {
-    c("Absolute"="absolute", "Relative"="relative", "Per Capita"="percapita")
+    c("Absolute"="absolute", "Per Capita"="percapita", "Relative"="relative")
   }
+}
+
+map_ui_get_scale_new_selected_value <- function(current_selection, choices) {
+  # Keep the current selection unless that is not not possible.
+  # (This happens when when we switch from filtered to unfiltered)
+  if (current_selection %in% choices) current_selection
+  else choices[[1]]
 }
 
 map_ui_scale_help <- function() {
