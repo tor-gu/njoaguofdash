@@ -27,7 +27,7 @@ njoaguofdashApp <- function(md_dir = NULL) {
             sidebarPanel(filterUI("filter"),
                          mapInputUI("map"),
                          bookmarkButton()),
-            mainPanel(mapOutputUI("map"),
+            mainPanel(shinycssloaders::withSpinner(mapOutputUI("map")),
                       tableUI("table"))
           ))),
         tabPanel("About", includeMarkdown(about_md))

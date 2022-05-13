@@ -22,6 +22,7 @@ Imports:
     rlang,
     rmarkdown,
     shiny,
+    shinycssloaders,
     shinyhelper,
     shinyjs,
     stringr,
