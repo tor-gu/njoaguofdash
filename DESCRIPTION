@@ -27,8 +27,7 @@ Imports:
     shinyjs,
     stringr,
     tidyr,
-    tigris,
-    torgutil
+    tigris
 RoxygenNote: 7.1.2
 Depends: 
     R (>= 2.10)

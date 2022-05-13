@@ -1,3 +1,12 @@
+tbl_as_named_list <- function(tbl, value_col, name_col) {
+  # Given a table and two columns, build a named list.
+  # Copied from torgutil
+  result <- tbl %>% dplyr::pull({{value_col}}) %>% as.list()
+  names(result) <- tbl %>% dplyr::pull({{name_col}}) %>% as.list()
+  result
+}
+
+
 filter_ui_make_filter_value_choice_list <-
   function(table, table_name, filter_name) {
     this_filter <- filters %>%
@@ -19,10 +28,10 @@ filter_ui_make_filter_value_choice_list <-
 filter_ui_make_filter_choice_list <- function(table_name) {
   single_value <- filters %>%
     dplyr::filter(table==table_name, is.na(join_table), filter != "all") %>%
-    torgutil::tbl_as_named_list(filter, display_name)
+    tbl_as_named_list(filter, display_name)
   multi_value <- filters %>%
     dplyr::filter(table==table_name, !is.na(join_table)) %>%
-    torgutil::tbl_as_named_list(filter, display_name)
+    tbl_as_named_list(filter, display_name)
   all <- filters %>%
     dplyr::filter(table==table_name, filter=="all") %>%
     dplyr::pull(display_name)
