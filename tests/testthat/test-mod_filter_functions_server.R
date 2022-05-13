@@ -1,5 +1,4 @@
 library(dplyr)
-library(njoaguof)
 
 test_that("filter_server_get_tables gets the state incident table", {
   actual <- filter_server_get_tables("incident", "state", "Morris County")
@@ -123,16 +122,16 @@ test_that("filter_server_get_joined_table handles subject/multi", {
 
 test_that("filter_server_get_filtered_table on incidents", {
   actual <-
-    filter_server_get_filtered_table(incident, "incident", "agency_county",
-                                     "Union County") %>%
+    filter_server_get_filtered_table(njoaguof::incident, "incident",
+                                     "agency_county", "Union County") %>%
     pull(agency_county) %>% as.character() %>% unique()
   expect_equal(actual, "Union County")
 })
 
 test_that("filter_server_get_filtered_table on subjects", {
   actual <-
-    filter_server_get_filtered_table(subject, "subject", "type",
-                                     "Person") %>%
+    filter_server_get_filtered_table(njoaguof::subject, "subject",
+                                     "type", "Person") %>%
     pull(type) %>% as.character() %>% unique()
   expect_equal(actual, "Person")
 })

@@ -47,7 +47,7 @@ filter_server_get_joined_table <- function(tables, table_name, filter_name) {
   }
 
   if (!is.na(this_filter$join_table)) {
-    join_table <- rlang::eval_tidy(rlang::sym(this_filter$join_table))
+    join_table <- getExportedValue("njoaguof", this_filter$join_table)
     base_table %>% dplyr::left_join(join_table, by="form_id")
   } else {
     base_table
