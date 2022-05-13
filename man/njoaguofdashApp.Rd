@@ -4,7 +4,11 @@
 \alias{njoaguofdashApp}
 \title{NJ OAG Use Of Force Dashboard app}
 \usage{
-njoaguofdashApp()
+njoaguofdashApp(md_dir = NULL)
+}
+\arguments{
+\item{md_dir}{Path to render the about.md file. If omitted or NULL, will
+render to a temp dir}
 }
 \value{
 Shiny app

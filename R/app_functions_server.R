@@ -20,3 +20,25 @@ app_exclude_bookmarks <- function() {
     )
   )
 }
+
+app_build_about_md <- function(md_dir) {
+  # Use a temp dir by default
+  if (is.null(md_dir)) md_dir <- tempdir()
+
+  # Copy the system about.Rmd to the md dir
+  if ( file.copy(system.file("about.Rmd", package="njoaguofdash"),
+                 md_dir,
+                 overwrite = TRUE) ) {
+    # Render the doc and return the path to about.md
+    rmarkdown::render(
+      file.path(md_dir, "about.Rmd"),
+      rmarkdown::md_document(),
+      output_dir = md_dir)
+  } else {
+      # Log a message and return an empty string.
+      # (when passed to includeMarkdown, will get get a blank page)
+      message(glue::glue(
+        "Cannot copy about.Rmd to {md_dir}; 'About' page will not be available"))
+      ""
+  }
+}

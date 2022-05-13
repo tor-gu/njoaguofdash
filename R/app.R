@@ -3,6 +3,9 @@ library(njoaguof)
 
 #' NJ OAG Use Of Force Dashboard app
 #'
+#' @param md_dir Path to render the about.md file. If omitted or NULL, will
+#' render to a temp dir
+#'
 #' @return Shiny app
 #' @export
 #'
@@ -10,14 +13,16 @@ library(njoaguof)
 #' \dontrun{
 #' njoaguofdashApp()
 #' }
-njoaguofdashApp <- function() {
+njoaguofdashApp <- function(md_dir = NULL) {
+
+  # Render once at startup
+  about_md <- app_build_about_md(md_dir)
 
   ui <- function(request) {
     navbarPage("NJOAGUOF Data Explorer", collapsible = FALSE, inverse = TRUE,
       tabPanel("Maps",
         fluidPage(
           shinyjs::useShinyjs(),
-          #titlePanel("NJOAGUOF Dashboard"),
           sidebarLayout(
             sidebarPanel(filterUI("filter"),
                          mapInputUI("map"),
@@ -25,11 +30,7 @@ njoaguofdashApp <- function() {
             mainPanel(mapOutputUI("map"),
                       tableUI("table"))
           ))),
-        tabPanel("About",
-                 #includeMarkdown("about.md"))
-                 includeMarkdown(rmarkdown::render("about.Rmd",
-                                 rmarkdown::md_document())))
-                 #includeHTML("about.html"))
+        tabPanel("About", includeMarkdown(about_md))
     )
   }
 
