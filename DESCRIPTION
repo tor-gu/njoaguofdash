@@ -1,7 +1,7 @@
 Package: njoaguofdash
 Type: Package
 Title: NJ OAG Use of Force data dashboard
-Version: 0.1.0.9000
+Version: 0.1.0.9001
 Authors@R: 
     person("Tor", "Gunston", , "tor.gunston@protonmail.com", role = c("aut", "cre"))
 Description: A dashboard application illustrating the njoaguof data package, 
