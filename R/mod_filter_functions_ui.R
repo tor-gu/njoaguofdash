@@ -6,6 +6,15 @@ tbl_as_named_list <- function(tbl, value_col, name_col) {
   result
 }
 
+filter_ui_get_selected_value <- function(choices, current_selection)  {
+  if (current_selection %in% choices) {
+    current_selection
+  } else if (length(choices) > 0) {
+    choices[[1]]
+  } else {
+    ""
+  }
+}
 
 filter_ui_make_filter_value_choice_list <-
   function(table, table_name, filter_name) {

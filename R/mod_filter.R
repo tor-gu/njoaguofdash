@@ -67,14 +67,18 @@ filterServer <- function(id) {
                              })
     })
 
-    # When a filter is set, we ned to freeze the value selection until
+    # When a filter is set, we need to freeze the value selection until
     # the values have been populated
     observe({
       if (filter_name() != "all") {
+        selected_value <- isolate(input$filter_value)
         freezeReactiveValue(input, "filter_value")
-        updateSelectInput(session, "filter_value", choices =
-                            filter_ui_make_filter_value_choice_list(
-                              joined_table(), input$table, filter_name()))
+        choices = filter_ui_make_filter_value_choice_list(
+            joined_table(), input$table, filter_name())
+        selected_value <- filter_ui_get_selected_value(choices,
+                                                       selected_value)
+        updateSelectInput(session, "filter_value", choices = choices,
+                          selected = selected_value)
       }
     })
 
