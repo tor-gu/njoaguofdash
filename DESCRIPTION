@@ -33,6 +33,7 @@ Depends:
     R (>= 4.1)
 Suggests: 
     devtools,
+    pkgload,
     purrr,
     readr,
     testthat (>= 3.0.0),

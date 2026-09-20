@@ -1,10 +1,12 @@
-# Entry point for Shiny hosting (shinyapps.io, Posit Connect, Shiny Server,
-# the Dockerfile in this repo).
+# Entry point for Shiny hosting: Posit Connect Cloud, shinyapps.io, Shiny
+# Server and the Dockerfile in this repo.
 #
-# .Rbuildignore'd, so not part of the installed package. 
+# This file is .Rbuildignore'd, so it is not part of the installed package.
 #
-# To run the app from an R session instead, use:
+# To run from an R session that already has the package installed:
 #
 #     njoaguofdash::njoaguofdashApp()
+
+pkgload::load_all(export_all = FALSE, helpers = FALSE, attach_testthat = FALSE)
 
 njoaguofdash::njoaguofdashApp()
