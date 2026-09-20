@@ -43,6 +43,11 @@ jobs:
           http-user-agent: ${{ matrix.config.http-user-agent }}
           use-public-rspm: true
 
+      # CRAN serves its macOS binaries zstd-compressed. pak recognises only
+      # gzip, zip, bzip2 and xz, so it aborts on them with "unknown archive
+      # type" (r-lib/pkgdepends#485). P3M rebuilds the same packages with gzip.
+      # Remove this once pkgdepends handles zstd. (use-public-rspm on setup-r
+      # above only redirects Linux.)
       - name: Install macOS binaries from P3M rather than CRAN
         if: runner.os == 'macOS'
         run: echo "PKG_CRAN_MIRROR=https://packagemanager.posit.co/cran/latest" >> $GITHUB_ENV
@@ -53,7 +58,6 @@ jobs:
         with:
           extra-packages: any::rcmdcheck
           needs: check
-          cache-version: 2
 
       - uses: r-lib/actions/check-r-package@v2
         with:
