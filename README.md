@@ -73,10 +73,10 @@ docker run --rm -p 3838:3838 njoaguofdash
 
 Then open <http://localhost:3838>.
 
-## shinyapps.io / Posit connect:
+### shinyapps.io / Posit Connect
 
 ```r
-rsconnect::deployApp(appFiles = "app.R")
+rsconnect::deployApp()
 ```
 
 ## Development

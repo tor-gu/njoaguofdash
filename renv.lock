@@ -2765,7 +2765,7 @@
     },
     "njoaguof": {
       "Package": "njoaguof",
-      "Version": "2.0.0",
+      "Version": "2.0.1",
       "Source": "GitHub",
       "Title": "NJ OAG Use of Force data package",
       "Authors@R": "person(\"Tor\", \"Gunston\", , \"tor.gunston@protonmail.com\", role = c(\"aut\", \"cre\"))",
@@ -2800,14 +2800,16 @@
       "VignetteBuilder": "knitr",
       "Config/roxygen2/version": "8.1.0",
       "Config/testthat/edition": "3",
-      "Author": "Tor Gunston [aut, cre]",
-      "Maintainer": "Tor Gunston <tor.gunston@protonmail.com>",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
-      "RemoteUsername": "tor-gu",
       "RemoteRepo": "njoaguof",
-      "RemoteRef": "main",
-      "RemoteSha": "e81ceb02b91d2abf3167aa60547b3b3f1b5f1600"
+      "RemoteUsername": "tor-gu",
+      "RemotePkgRef": "tor-gu/njoaguof",
+      "RemoteRef": "HEAD",
+      "RemoteSha": "2266282f2494e617212f4fa64f93dbc64f39fd07",
+      "NeedsCompilation": "no",
+      "Author": "Tor Gunston [aut, cre]",
+      "Maintainer": "Tor Gunston <tor.gunston@protonmail.com>"
     },
     "nlme": {
       "Package": "nlme",

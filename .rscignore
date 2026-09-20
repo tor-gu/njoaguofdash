@@ -1,0 +1,22 @@
+# Files rsconnect should not ship to a Shiny host.
+#
+# .Rprofile is the important one: it does source("renv/activate.R"), but
+# rsconnect excludes renv/ from the bundle, so the host is left with an
+# .Rprofile pointing at a file that is not there and R fails to start with
+# "cannot open file 'renv/activate.R'". The host installs the packages listed
+# in renv.lock itself, so it has no use for renv's activation machinery.
+.Rprofile
+renv
+
+# Development and packaging files the running app has no use for. app.R calls
+# pkgload::load_all(), which needs DESCRIPTION, NAMESPACE, R/ and inst/ -- so
+# those must stay.
+.github
+.Rbuildignore
+.dockerignore
+.rscignore
+Dockerfile
+data-raw
+man
+tests
+rsconnect
