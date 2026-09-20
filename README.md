@@ -6,7 +6,7 @@
 
 An interactive map of New Jersey use-of-force reports, built to illustrate the
 R data package [njoaguof](https://github.com/tor-gu/njoaguof), a repackaging of the [NJ Attorney General's use of force
-dataset](https://www.njoag.gov/force/).
+dataset](https://www.njoag.gov/force/). Currently deployed [here](https://tor-gu-njoaguofdash.share.connect.posit.cloud/).
 
 ![The dashboard showing use-of-force incidents per 100,000 residents per year, by New Jersey county](man/figures/README-dashboard.png)
 
