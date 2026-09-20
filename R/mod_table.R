@@ -22,8 +22,14 @@ tableServer <- function(id, filter_result, clicked_region) {
       )
     })
 
-    # Load the table of subject or incidents
+    # Load the table of subjects or incidents for the clicked region.
+    #
+    # req() keeps this output silent until a region is clicked. An empty DT
+    # still counts as an output value, and one rendered in the session's first
+    # flush displaces the plotly map's value from that same message, leaving
+    # the map stuck behind its loading spinner.
     region_table <- reactive({
+      req(clicked_region())
       table_server_get_region_table(
         filter_result$filtered_table(),
         filter_result$geography(),
@@ -43,6 +49,7 @@ tableServer <- function(id, filter_result, clicked_region) {
 
     # Table header
     header_text <- reactive({
+      req(clicked_region())
       table_server_get_header_text(filter_result$table_name(), clicked_region())
     })
 
