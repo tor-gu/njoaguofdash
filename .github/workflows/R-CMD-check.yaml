@@ -43,6 +43,10 @@ jobs:
           http-user-agent: ${{ matrix.config.http-user-agent }}
           use-public-rspm: true
 
+      - name: Install macOS binaries from P3M rather than CRAN
+        if: runner.os == 'macOS'
+        run: echo "PKG_CRAN_MIRROR=https://packagemanager.posit.co/cran/latest" >> $GITHUB_ENV
+
       # njoaguof is GitHub-only; setup-r-dependencies resolves it from the
       # Remotes: field in DESCRIPTION.
       - uses: r-lib/actions/setup-r-dependencies@v2
