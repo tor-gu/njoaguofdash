@@ -2,6 +2,8 @@
 title: "About"
 output: html_document
 ---
+
+
 ## NJ OAG Use of Force Data Explorer
 This is a simple dashboard to illustrate the use of the [`njoaguof`](https://github.com/tor-gu/njoaguof) data package for R, which is a
 repackaging of the the use of force data released by the [New Jersey 
@@ -59,7 +61,6 @@ interactive map.
 
 The table uses the [DT](https://rstudio.github.io/DT/) package. 
 
-The maps and the population data are from the US Census, obtained through the [tigris](https://github.com/walkerke/tigris) and [tidycensus](https://walker-data.com/tidycensus/index.html) packages, respectively.
+The maps are TIGER/Line 2024 boundaries from the US Census, obtained through the [tigris](https://github.com/walkerke/tigris) package. The population figures are the US Census Population Estimates Program's vintage 2024 estimates.
 
 The source code is available [here](https://github.com/tor-gu/njoaguofdash).
-

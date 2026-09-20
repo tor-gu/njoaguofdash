@@ -1,7 +1,7 @@
 table_server_get_region_table <- function(filtered_table, geography,
                                           region) {
   # Filter the table by the selected region (or
-  # return NULL if there is no region)                                                                                  region) {
+  # return NULL if there is no region)
   if (is.null(region)) {
     return(NULL)
   } else if (geography=="state") {

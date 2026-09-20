@@ -1,4 +1,4 @@
-filters <- tibble::tribble(
+filters <- tribble(
   ~table,     ~filter,                    ~display_name,              ~join_table, ~filter_column,
 
   ### incident table

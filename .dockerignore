@@ -1,0 +1,7 @@
+renv/library/
+renv/staging/
+renv/local/
+renv/cellar/
+.Rproj.user/
+.git/
+man/figures/

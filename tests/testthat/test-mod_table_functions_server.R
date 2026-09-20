@@ -7,7 +7,9 @@ test_that("table_server_get_region_table filters on a county", {
   region_table <- table_server_get_region_table(filtered_table, "state",
                                                 "Ocean County")
   expect_equal(nrow(filtered_table), 7)
-  expect_equal(region_table$form_id, c(201045,201066))
+  # ignore_attr: njoaguof 2.0.0 columns carry superfluous attributess inherited 
+  # from the data source
+  expect_equal(region_table$form_id, c(201045, 201066), ignore_attr = TRUE)
 })
 
 test_that("table_server_get_region_table filters on a town", {
@@ -17,7 +19,8 @@ test_that("table_server_get_region_table filters on a town", {
   region_table <- table_server_get_region_table(filtered_table, "county",
                                                 "Newark city")
   expect_equal(nrow(filtered_table), 7)
-  expect_equal(region_table$form_id, c(28157,28168,28124,28142,28382 ))
+  expect_equal(region_table$form_id, c(28157, 28168, 28124, 28382, 28142),
+               ignore_attr = TRUE)
 })
 
 test_that("table_server_get_region_table finds the right incident columns", {

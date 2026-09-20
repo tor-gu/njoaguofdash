@@ -27,7 +27,9 @@ map_server_get_table_summary <- function(geography, county, table) {
 
 map_server_get_region_values <- function(table_name,
                                          filtered_summary,
-                                         unfiltered_summary) {
+                                         unfiltered_summary,
+                                         data_range_in_years =
+                                           njoaguof_data_range_in_years()) {
   if (table_name == "incident")
     label <- "incidents"
   else
@@ -68,11 +70,9 @@ map_server_get_region_values <- function(table_name,
 }
 
 map_server_add_values_to_map <- function(map, values) {
+  # Keep only the regions present in both the map and the summary values.
   map %>%
-    tigris::geo_join(values,
-                     by_sp = "NAMELSAD",
-                     by_df = "region",
-                     how = "inner")
+    dplyr::inner_join(values, by = c("NAMELSAD" = "region"))
 }
 
 map_server_get_title_text <- function(geography, county, table_name, scale) {

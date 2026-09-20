@@ -38,7 +38,7 @@ mapServer <- function(id, filter_result) {
     # Simplify the click event to a string (or NULL)
     observeEvent(plotly::event_data("plotly_click"), {
       tryCatch({
-        event <- plotly::event_data("plotly_click") %>% head(1)
+        event <- plotly::event_data("plotly_click") %>% utils::head(1)
         clicked_region(dplyr::pull(event, key))
       }, error = function(e) {
         clicked_region(NULL)
@@ -128,10 +128,6 @@ mapServer <- function(id, filter_result) {
       } else {
         percapita_plot()
       }
-    }
-
-    suppressPlotlyMessage <- function(p) {
-      suppressWarnings(plotly::plotly_build(p))
     }
 
     output$plot <- plotly::renderPlotly({

@@ -1,5 +1,7 @@
+library(dplyr)
+
 test_that("map_server_get_map returns a state map", {
-  map <- map_server_get_map("state")
+  map <- map_server_get_map("state", NULL)
   expect_true("sf" %in% class(map))
   expect_equal(map %>% pull(NAMELSAD) %>% sort(), counties)
 })
@@ -50,15 +52,32 @@ test_that("map_server_get_region_values works", {
     "C",     0L,
     "D",     NA,
   )
+  # Pin the divisor: left to its default it tracks the installed njoaguof, so
+  # these expectations would move with every data release.
   actual <- map_server_get_region_values("incident",
                                          filtered_summary,
-                                         unfiltered_summary)
+                                         unfiltered_summary,
+                                         data_range_in_years = 2)
   expected <- tibble::tribble(
     ~region, ~absolute_count, ~population, ~region_count, ~relative, ~percapita, ~hover_text,
-    "A",     1,               10,          1,             100,        6640,      "A\n1 incidents\n100% of all incidents\n6640 per 100K pop/year",
+    "A",     1,               10,          1,             100,        5000,      "A\n1 incidents\n100% of all incidents\n5000 per 100K pop/year",
     "B",     0,               15,          3,               0,           0,      "B\n0 incidents\n0% of all incidents\n0 per 100K pop/year",
     "C",     NA,              15,          0,              NA,          NA,      "C\nNo data",
     "D",     NA,              30,          NA,             NA,          NA,      "D\nNo data",
   )
   expect_equal(actual, expected)
+})
+
+
+test_that("the per-capita divisor tracks the installed njoaguof data", {
+  # The divisor must be derived from the installed data rather than stored
+  # alongside the maps in sysdata.rda: a cached copy goes stale, and every
+  # per-capita figure on the map is wrong by whatever the drift is.
+  incident_dates <- range(njoaguof::incident$incident_date_1, na.rm = TRUE)
+  expected <- as.numeric(incident_dates[[2]] - incident_dates[[1]]) / 365.25
+
+  expect_equal(njoaguof_data_range_in_years(), expected)
+  expect_false(exists("data_range_in_years",
+                      envir = asNamespace("njoaguofdash"),
+                      inherits = FALSE))
 })

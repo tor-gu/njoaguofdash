@@ -1,6 +1,3 @@
-library(shiny)
-library(njoaguof)
-
 #' NJ OAG Use Of Force Dashboard app
 #'
 #' @param md_dir Path to render the about.md file. If omitted or NULL, will
@@ -35,7 +32,7 @@ njoaguofdashApp <- function(md_dir = NULL) {
   }
 
   server <- function(input, output, session) {
-    shinyhelper::observe_helpers(help_dir = "helpfiles")
+    shinyhelper::observe_helpers()
     app_exclude_bookmarks()
 
     current_filter <- filterServer("filter")

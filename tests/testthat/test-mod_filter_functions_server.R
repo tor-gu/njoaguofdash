@@ -58,14 +58,13 @@ test_that("filter_server_get_summary_table handles county level", {
   incident_summary <-
     filter_server_get_summary_table(tables, "incident", "county") %>%
     head(3)
-  actual <- c("Boonton town", "Butler borough", "Chatham borough")
+  actual <- c("Boonton town", "Boonton township", "Butler borough")
   expect_equal(subject_summary %>% pull(region), actual)
   expect_equal(incident_summary %>% pull(region), actual)
 })
 
 
-test_that("filter_server_get_summary_table halibrary(njoaguof)
-ndles state level", {
+test_that("filter_server_get_summary_table handles state level", {
   tables <- filter_server_get_tables("subject", "state", "")
   subject_summary <-
     filter_server_get_summary_table(tables, "subject", "state") %>%
